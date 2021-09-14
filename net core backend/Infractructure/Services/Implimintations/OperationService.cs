@@ -57,6 +57,8 @@ namespace net_core_backend.Services.Implimintations
                     x.PersonId,
                     x.Person.Login))
                     .ToList();
+            operationResponse.ExpanseSumm = (double)operationResponse.Operations.Where(x => x.Type == (int)OperationType.Expanse).Sum(x => x.Amount);
+            operationResponse.IncomeSumm = (double)operationResponse.Operations.Where(x => x.Type == (int)OperationType.Income).Sum(x => x.Amount);
             return operationResponse;
         }
 

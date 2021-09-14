@@ -23,6 +23,10 @@ namespace Infractructure.Services.Implimintations
             {
                 throw new BadRequestException("Source is null");
             }
+            if (_source.GetFiltered(s => s.Name == sourceModel.Name).FirstOrDefault() != null)
+            {
+                throw new BadRequestException("Source with that name already exist");
+            }
             OperationSource source = new OperationSource(sourceModel.Name, (sourceModel.Type == (int)OperationType.Expanse) ? OperationType.Expanse : OperationType.Income);
             _source.Create(source);
         }
